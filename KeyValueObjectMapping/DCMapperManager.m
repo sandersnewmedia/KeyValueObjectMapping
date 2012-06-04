@@ -11,6 +11,7 @@
 #import "DCNSDateConverter.h"
 #import "DCForeignKeyConverter.h"
 #import "DCNSSetConverter.h"
+#import "DCDynamicAttribute.h"
 
 
 @implementation DCMapperManager {
@@ -168,4 +169,8 @@
     }
 }
 
+- (NSString *)primaryKeyAttributeNameForClass:(Class)class
+{
+    return [[self mapperForClass:class] primaryKeyAttribute].objectMapping.attributeName;
+}
 @end

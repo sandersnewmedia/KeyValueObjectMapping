@@ -43,8 +43,9 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kDCKeyValueObjectMappingRequestPopulationNotification object:nil
                                                               userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                       parser.classToGenerate, @"class",
-                                                                      value, @"primaryKey"
-                                                                               ,nil]];
+                                                                      value, @"primaryKey",
+                                                                      result, @"object",
+                                                                               nil]];
 
         }
 

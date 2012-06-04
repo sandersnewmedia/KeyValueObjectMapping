@@ -33,4 +33,5 @@
 
 - (id)serialize:(id)objectOrArray;
 
+- (NSString *)primaryKeyAttributeNameForClass:(Class)class;
 @end
