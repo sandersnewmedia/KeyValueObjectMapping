@@ -34,6 +34,11 @@
 
 - (id)transformValue:(id)value forDynamicAttribute:(DCDynamicAttribute *)attribute
 {
+    if (value == (id)[NSNull null] ) {
+         return nil;
+    }
+
+    NSLog(@"encountered relationship to object of class %@ with primary key'%@'",parser.class, value);
     id result;
     if (!isNested) {
         NSString *primaryKey = value;

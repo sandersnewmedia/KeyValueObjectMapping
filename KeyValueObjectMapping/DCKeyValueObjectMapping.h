@@ -37,4 +37,6 @@
 
 
 - (NSArray *)serializeObjectArray:(NSArray *)objectArray;
+
+- (id)parseDictionary:(id)dictionary originalObject:(id)originalObject;
 @end

@@ -149,13 +149,17 @@
 }
 
 
--(id) parse:(id) dictionaryOrArray ForClass:(Class) class{
+- (id)parse:(id)dictionaryOrArray ForClass:(Class)class originalObject:(id)originalObject {
     DCKeyValueObjectMapping * mapper = [self mapperForClass:class];
     if ([dictionaryOrArray isKindOfClass:[NSArray class]]) {
         return [mapper parseArray:dictionaryOrArray];
     } else {
-        return [mapper parseDictionary:dictionaryOrArray];
+        return [mapper parseDictionary:dictionaryOrArray originalObject:originalObject];
     }
+}
+
+-(id) parse:(id) dictionaryOrArray ForClass:(Class) class{
+     return [self parse:dictionaryOrArray ForClass:class originalObject:nil];
 }
 
 -(id) serialize:(id) objectOrArray {

@@ -81,11 +81,6 @@
 
 - (NSDictionary *)serializeObject:(id)object
 {
-    if (NO) { //fixme
-        return [object valueForKeyPath:[self primaryKeyAttribute].objectMapping.attributeName];
-    }
-
-
     NSMutableDictionary *serializedObject = [[NSMutableDictionary alloc] init];
 
     for (DCObjectMapping *mapping in propertyFinder.mappers) {
@@ -114,7 +109,7 @@
     return [NSArray arrayWithArray:serializedObjects];
 }
 
-- (id) parseDictionary: (NSDictionary *) dictionary {
+- (id) parseDictionary: (NSDictionary *) dictionary originalObject:(id) originalObject {
     if(!dictionary || !classToGenerate){
         return nil;
     }
@@ -124,27 +119,42 @@
 
 
 
-    id object = nil;
-    if (configuration.primaryKeyName) {
-        id primaryKeyValue = [dictionary valueForKey:configuration.primaryKeyName];
-        id primaryKeyConvertedValue = [converter transformValue:primaryKeyValue forDynamicAttribute:[self primaryKeyAttribute]];
-        object = [self findObjectByPrimaryKeyValue:primaryKeyConvertedValue];
-        if (!object) {
-            object = [self createObjectWithPrimaryKeyValue:primaryKeyValue];
+    id object = originalObject;
+    if (!object) {
+        if (configuration.primaryKeyName) {
+            id primaryKeyValue = [dictionary valueForKey:configuration.primaryKeyName];
+            id primaryKeyConvertedValue = [converter transformValue:primaryKeyValue forDynamicAttribute:[self primaryKeyAttribute]];
+            object = [self findObjectByPrimaryKeyValue:primaryKeyConvertedValue];
+            if (!object) {
+                object = [self createObjectWithPrimaryKeyValue:primaryKeyValue];
+            }
+        } else {
+            object = [self createObjectWithPrimaryKeyValue:nil];
+        }
+    }
+
+
+
+    if (NO) { //fixme configuration option
+        NSArray *keys = [dictionary allKeys];
+        for (NSString *key in keys) {
+            id value = [dictionary valueForKey:key];
+            DCDynamicAttribute *dynamicAttribute = [propertyFinder findAttributeForKey:key onClass:classToGenerate];
+            if(dynamicAttribute){
+                [self parseValue:value forObject:object inAttribute:dynamicAttribute];
+            }      else {
+                NSLog(@"serializedKey '%@' not found in mapping of %@", key, classToGenerate);
+            }
         }
     } else {
-        object = [self createObjectWithPrimaryKeyValue:nil];
-    }
-
-
-    NSArray *keys = [dictionary allKeys];
-    for (NSString *key in keys) {
-        id value = [dictionary valueForKey:key];
-        DCDynamicAttribute *dynamicAttribute = [propertyFinder findAttributeForKey:key onClass:classToGenerate];
-        if(dynamicAttribute){
+        for (DCDynamicAttribute *dynamicAttribute in [propertyFinder allAttributesForClass:classToGenerate]) {
+            id value = [dictionary valueForKeyPath:dynamicAttribute.objectMapping.keyReference];
             [self parseValue:value forObject:object inAttribute:dynamicAttribute];
         }
+
     }
+
+
     return object;
 }
 
@@ -152,11 +162,16 @@
 - (void) parseValue: (id) value forObject: (id) object inAttribute: (DCDynamicAttribute *) dynamicAttribute {
     DCObjectMapping *objectMapping = dynamicAttribute.objectMapping;
 
+
     NSString *attributeName = objectMapping.attributeName;
+
+    NSLog(@"transforming value '%@' for attribute '%@' of object %@", value, attributeName, object);
     if (objectMapping.converter)
         value = [objectMapping.converter transformValue:value forDynamicAttribute:dynamicAttribute];
     else
         value = [converter transformValue:value forDynamicAttribute:dynamicAttribute];
+
+    NSLog(@"assigning value '%@' to attribute '%@' on object %@", value, attributeName, object);
     [DCAttributeSetter assingValue:value forAttributeName:attributeName andAttributeClass:objectMapping.classReference onObject:object];
 }
 
@@ -173,4 +188,8 @@
 }
 
 
+- (id)parseDictionary:(NSDictionary *)dictionary
+{
+ return [self parseDictionary:dictionary originalObject:nil];
+}
 @end

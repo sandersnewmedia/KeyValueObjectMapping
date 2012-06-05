@@ -23,7 +23,7 @@
 
 
 + (DCNSArrayConverter *) arrayConverterForConfiguration: (DCParserConfiguration *)configuration {
-    return [[self alloc] initWithConfiguration: configuration];
+    return [[DCNSArrayConverter alloc] initWithConfiguration: configuration];
 }
 
 

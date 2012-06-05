@@ -29,6 +29,7 @@
 - (DCManagedObjectMapping *)managedMapperForClass:(Class)class;
 
 - (id)parse:(id)dictionaryOrArray ForClass:(Class)class;
+- (id)parse:(id)dictionaryOrArray ForClass:(Class)class originalObject:(id)originalObject;
 
 
 - (id)serialize:(id)objectOrArray;

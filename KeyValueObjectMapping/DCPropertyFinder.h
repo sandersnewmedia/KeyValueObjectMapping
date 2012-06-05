@@ -19,4 +19,5 @@
 - (DCDynamicAttribute *) findAttributeForKey: (NSString *) key onClass: (Class) className;
 
 
+- (NSArray *)allAttributesForClass:(Class) class;
 @end

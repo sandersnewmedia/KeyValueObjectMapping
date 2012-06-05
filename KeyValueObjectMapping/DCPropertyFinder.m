@@ -83,4 +83,21 @@
 }
 
 
+- (NSArray *)allAttributesForClass:(Class) class
+{
+    NSMutableArray *allAttributes = [NSMutableArray array];
+    for (DCObjectMapping *mapper in mappers){
+
+        NSString *propertyDetails = [self findPropertyDetailsForKey:mapper.attributeName onClass:class];
+
+
+        DCDynamicAttribute *dynamicAttribute = [[DCDynamicAttribute alloc] initWithAttributeDescription: propertyDetails
+                                                                                                 forKey:mapper.keyReference
+                                                                                          attributeName:mapper.attributeName
+                                                                                              converter:mapper.converter];
+        [allAttributes addObject:dynamicAttribute];
+    }
+    return [NSArray arrayWithArray:allAttributes];
+
+}
 @end
