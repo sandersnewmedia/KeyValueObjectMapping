@@ -16,6 +16,8 @@
 
 @implementation DCParserConfiguration
 @synthesize defaultDatePattern, splitToken, primaryKeyName, arrayMappers, objectMappers, aggregators;
+@synthesize useOnlySpecifiedMappers = _useOnlySpecifiedMappers;
+
 
 + (DCParserConfiguration *) configuration {
     return [[self alloc] init];

@@ -11,6 +11,7 @@
 #import "DCPropertyAggregator.h"
 @interface DCParserConfiguration : NSObject
 
+@property BOOL useOnlySpecifiedMappers;
 @property(nonatomic, strong) NSString *defaultDatePattern;
 @property(nonatomic, strong) NSString *splitToken;
 @property(nonatomic, strong) NSString *primaryKeyName;

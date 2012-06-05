@@ -63,7 +63,7 @@
 
 - (id)createMapperForClass:(Class)class fromDictionary:(NSDictionary *)classDict {
     DCParserConfiguration *config = [DCParserConfiguration configuration];
-
+    config.useOnlySpecifiedMappers = YES;
     for (NSDictionary *fieldDict in [classDict objectForKey:@"fields"])
     {
         if ([[fieldDict objectForKey:@"primaryKey"] boolValue])  {

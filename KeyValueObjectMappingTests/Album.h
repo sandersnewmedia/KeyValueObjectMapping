@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * id;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * genre;
 @property (nonatomic, retain) NSSet *songs;
 @property (nonatomic, retain) Artist *artist;
 @end

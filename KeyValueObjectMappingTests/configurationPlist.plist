@@ -51,6 +51,12 @@
 				<string>name</string>
 			</dict>
 			<dict>
+				<key>attribute</key>
+				<string>genre</string>
+				<key>serializedAttribute</key>
+				<string>meta.deepmeta.genre</string>
+			</dict>
+			<dict>
 				<key>primaryKey</key>
 				<true/>
 				<key>attribute</key>

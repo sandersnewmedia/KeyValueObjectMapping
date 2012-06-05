@@ -135,7 +135,7 @@
 
 
 
-    if (NO) { //fixme configuration option
+    if (!configuration.useOnlySpecifiedMappers) {
         NSArray *keys = [dictionary allKeys];
         for (NSString *key in keys) {
             id value = [dictionary valueForKey:key];

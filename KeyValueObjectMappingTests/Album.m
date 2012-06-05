@@ -17,5 +17,6 @@
 @dynamic name;
 @dynamic songs;
 @dynamic artist;
+@dynamic genre;
 
 @end

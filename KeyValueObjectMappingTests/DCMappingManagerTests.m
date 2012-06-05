@@ -10,6 +10,7 @@
 #import "Artist.h"
 #import "Song.h"
 #import "Album.h"
+#import "NSManagedObject+TestCase.h"
 
 
 @implementation DCMappingManagerTests {
@@ -47,6 +48,21 @@
     STAssertNotNil(mapping, nil);
     return mapping;
 
+}
+
+-(void)testMappings {
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle bundleForClass: [self class]] pathForResource:@"albums"
+                                                                                            ofType:@"json"]];
+    NSError *error;
+    id albumsFixture = [NSJSONSerialization JSONObjectWithData:data
+                                                    options:NSJSONReadingMutableContainers error:&error];
+
+    [mapperManager parse:albumsFixture ForClass:[Album class]];
+
+    Album *album = [[Album findAllObjectsInContext:ctx] lastObject];
+    STAssertNotNil(album, nil);
+    STAssertNotNil(album.genre, nil);
+    STAssertEqualObjects(album.genre, @"Rock", nil);
 }
 
 @end
