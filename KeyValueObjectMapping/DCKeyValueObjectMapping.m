@@ -143,7 +143,7 @@
             if(dynamicAttribute){
                 [self parseValue:value forObject:object inAttribute:dynamicAttribute];
             }      else {
-                NSLog(@"serializedKey '%@' not found in mapping of %@", key, classToGenerate);
+//                NSLog(@"serializedKey '%@' not found in mapping of %@", key, classToGenerate);
             }
         }
     } else {
@@ -165,13 +165,13 @@
 
     NSString *attributeName = objectMapping.attributeName;
 
-    NSLog(@"transforming value '%@' for attribute '%@' of object %@", value, attributeName, object);
+//    NSLog(@"transforming value '%@' for attribute '%@' of object %@", value, attributeName, object);
     if (objectMapping.converter)
         value = [objectMapping.converter transformValue:value forDynamicAttribute:dynamicAttribute];
     else
         value = [converter transformValue:value forDynamicAttribute:dynamicAttribute];
 
-    NSLog(@"assigning value '%@' to attribute '%@' on object %@", value, attributeName, object);
+//    NSLog(@"assigning value '%@' to attribute '%@' on object %@", value, attributeName, object);
     [DCAttributeSetter assingValue:value forAttributeName:attributeName andAttributeClass:objectMapping.classReference onObject:object];
 }
 

@@ -38,7 +38,7 @@
          return nil;
     }
 
-    NSLog(@"encountered relationship to object of class %@ with primary key'%@'",parser.class, value);
+//    NSLog(@"encountered relationship to object of class %@ with primary key'%@'",parser.class, value);
     id result;
     if (!isNested) {
         NSString *primaryKey = value;
