@@ -23,7 +23,8 @@
 
 - (id) initWithClass: (Class) _classToGenerate forConfiguration: (DCParserConfiguration *) _configuration
         andManagedObjectContext: (NSManagedObjectContext *)_context {
-    if (self=[self initWithClass:_classToGenerate forConfiguration:_configuration]) {
+    self=[self initWithClass:_classToGenerate forConfiguration:_configuration];
+    if (self) {
          context=_context;
     }
     return self;

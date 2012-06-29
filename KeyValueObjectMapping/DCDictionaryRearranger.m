@@ -17,10 +17,10 @@
     NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
     if(aggregators && [aggregators count] > 0){
         for(int i=[aggregators count] - 1; i >= 0; --i){
-            DCPropertyAggregator *aggretor = [aggregators objectAtIndex:i];
-            [aggregators removeObject:aggretor];
-            NSDictionary *aggregatedValues = [aggretor aggregateKeysOnDictionary:mutableDictionary];
-            [mutableDictionary setValue:aggregatedValues forKey:aggretor.attribute];
+            DCPropertyAggregator *aggregator = [aggregators objectAtIndex:(NSUInteger)i];
+            [aggregators removeObject:aggregator];
+            NSDictionary *aggregatedValues = [aggregator aggregateKeysOnDictionary:mutableDictionary];
+            [mutableDictionary setValue:aggregatedValues forKey:aggregator.attribute];
         }
     }
     return mutableDictionary;

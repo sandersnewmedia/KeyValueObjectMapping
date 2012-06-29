@@ -172,7 +172,7 @@
         value = [converter transformValue:value forDynamicAttribute:dynamicAttribute];
 
 //    NSLog(@"assigning value '%@' to attribute '%@' on object %@", value, attributeName, object);
-    [DCAttributeSetter assingValue:value forAttributeName:attributeName andAttributeClass:objectMapping.classReference onObject:object];
+    [DCAttributeSetter assignValue:value forAttributeName:attributeName andAttributeClass:objectMapping.classReference onObject:object];
 }
 
 

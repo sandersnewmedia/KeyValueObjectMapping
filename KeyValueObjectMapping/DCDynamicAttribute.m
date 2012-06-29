@@ -36,7 +36,7 @@
 
     if (self) {
         NSArray *splitedDescription = [description componentsSeparatedByString:@","];
-        NSString *attributeName = nil;
+        NSString *attributeName;
         if (!_attibuteName)
             attributeName = [self findTypeName: [splitedDescription lastObject]];
         else

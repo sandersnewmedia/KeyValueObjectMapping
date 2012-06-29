@@ -10,7 +10,7 @@
 
 @implementation DCAttributeSetter
 
-+ (void)assingValue:(id)value forAttributeName: (NSString *)attributeName andAttributeClass: (Class) attributeClass onObject:(id)object {
++ (void)assignValue:(id)value forAttributeName: (NSString *)attributeName andAttributeClass: (Class) attributeClass onObject:(id)object {
     if([object validateValue:&value forKey:attributeName error:nil]){
         if([value isKindOfClass:[NSNull class]]){
             [self setNilValueForKey: attributeName onObject: object forClass:attributeClass];

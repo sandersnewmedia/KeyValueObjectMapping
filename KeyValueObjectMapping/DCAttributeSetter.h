@@ -10,6 +10,6 @@
 
 @interface DCAttributeSetter : NSObject
 
-+ (void)assingValue:(id)value forAttributeName: (NSString *)attributeName andAttributeClass: (Class) attributeClass onObject:(id)object;
++ (void)assignValue:(id)value forAttributeName: (NSString *)attributeName andAttributeClass: (Class) attributeClass onObject:(id)object;
 
 @end
