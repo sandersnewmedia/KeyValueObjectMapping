@@ -15,6 +15,12 @@
         if([value isKindOfClass:[NSNull class]]){
             [self setNilValueForKey: attributeName onObject: object forClass:attributeClass];
         }else {
+            id oldValue = [object valueForKeyPath:attributeName];
+            if ([oldValue respondsToSelector:@selector(isEqual:)])
+            {
+                if ([oldValue isEqual:value])
+                    return;
+            }
             [object setValue:value forKey:attributeName];
         }
     }
