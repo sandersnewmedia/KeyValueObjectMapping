@@ -96,9 +96,10 @@
 {
     Class class = [notification.userInfo objectForKey:@"class"];
     id primaryKey = [notification.userInfo objectForKey:@"primaryKey"];
+    id relatedToObject = [notification.userInfo objectForKey:@"relatedToObject"];
 
     [self.delegate mapperManager:self
-            requestedPopulatingOfObjectOfClass:class primaryKey:primaryKey];
+            requestedPopulatingOfObjectOfClass:class primaryKey:primaryKey relatedToObject:relatedToObject];
 }
 
 - (id)initWithConfiguration:(NSDictionary *)configurationDictionary andManagedObjectContext:(NSManagedObjectContext

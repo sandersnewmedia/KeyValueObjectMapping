@@ -14,7 +14,7 @@
 @protocol DCMapperManagerDelegate
 - (void) mapperManager:(DCMapperManager *)mapperManager
         requestedPopulatingOfObjectOfClass:(Class)class
-            primaryKey:(id) primaryKey;
+            primaryKey:(id) primaryKey relatedToObject:(id) relatedToObject;
 @end
 
 

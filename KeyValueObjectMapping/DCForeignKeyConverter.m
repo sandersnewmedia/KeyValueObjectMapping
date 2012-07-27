@@ -32,7 +32,12 @@
     return [self initWithParser:_parser isNested:NO fullSerialization:_fullSerialization];
 }
 
-- (id)transformValue:(id)value forDynamicAttribute:(DCDynamicAttribute *)attribute
+- (id)transformValue:(id)values forDynamicAttribute:(DCDynamicAttribute *)attribute {
+    return [self transformValue:values forDynamicAttribute:attribute inObject:nil];
+}
+
+
+- (id)transformValue:(id)value forDynamicAttribute:(DCDynamicAttribute *)attribute inObject:(id) object
 {
     if (value == (id)[NSNull null] ) {
          return nil;
@@ -50,6 +55,7 @@
                                                                       parser.classToGenerate, @"class",
                                                                       value, @"primaryKey",
                                                                       result, @"object",
+                                                                      object, @"relatedToObject",
                                                                                nil]];
 
         }

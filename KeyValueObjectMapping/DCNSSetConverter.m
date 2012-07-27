@@ -16,6 +16,13 @@
     return [NSSet setWithArray:result];
 }
 
+- (id)transformValue:(id)values forDynamicAttribute:(DCDynamicAttribute *)attribute inObject:(id)object {
+
+    NSArray *result = [super transformValue:values forDynamicAttribute:attribute inObject:object];
+    return [NSSet setWithArray:result];
+}
+
+
 
 - (BOOL)canTransformValueForClass:(Class) classe {
     return [classe isSubclassOfClass:[NSSet class]];

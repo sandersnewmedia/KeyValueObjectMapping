@@ -43,11 +43,18 @@
 }
 
 - (id)transformValue:(id)values forDynamicAttribute:(DCDynamicAttribute *)attribute {
+    return [self transformValue:values forDynamicAttribute:attribute inObject:nil];
+}
+
+- (id)transformValue:(id)values forDynamicAttribute:(DCDynamicAttribute *)attribute  inObject:(id)object {
     if (converter) {
         //fixme more efficient way
         NSMutableArray * result = [NSMutableArray array];
         for (id value in values) {
-            [result addObject:[converter transformValue:value forDynamicAttribute:attribute]];
+            if ([converter respondsToSelector:@selector(transformValue:forDynamicAttribute:inObject:)])
+                [result addObject:[converter transformValue:value forDynamicAttribute:attribute inObject:object]];
+            else
+                [result addObject:[converter transformValue:value forDynamicAttribute:attribute]];
         }
         return result;
     }

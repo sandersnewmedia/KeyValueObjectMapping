@@ -166,10 +166,15 @@
     NSString *attributeName = objectMapping.attributeName;
 
 //    NSLog(@"transforming value '%@' for attribute '%@' of object %@", value, attributeName, object);
-    if (objectMapping.converter)
-        value = [objectMapping.converter transformValue:value forDynamicAttribute:dynamicAttribute];
-    else
-        value = [converter transformValue:value forDynamicAttribute:dynamicAttribute];
+    if (objectMapping.converter)     {
+        if ([objectMapping.converter respondsToSelector:@selector(transformValue:forDynamicAttribute:inObject:)])
+            value = [objectMapping.converter transformValue:value forDynamicAttribute:dynamicAttribute inObject:object];
+        else
+            value = [objectMapping.converter transformValue:value forDynamicAttribute:dynamicAttribute];
+    }
+    else {
+         value = [converter transformValue:value forDynamicAttribute:dynamicAttribute];
+    }
 
 //    NSLog(@"assigning value '%@' to attribute '%@' on object %@", value, attributeName, object);
     [DCAttributeSetter assignValue:value forAttributeName:attributeName andAttributeClass:objectMapping.classReference onObject:object];

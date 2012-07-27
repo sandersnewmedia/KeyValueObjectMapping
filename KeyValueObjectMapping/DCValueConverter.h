@@ -15,6 +15,7 @@
 - (BOOL) canTransformValueForClass: (Class) class;
 
 
-
+@optional
+- (id) transformValue:(id)value forDynamicAttribute:(DCDynamicAttribute *)attribute inObject:(id)object;
 
 @end
