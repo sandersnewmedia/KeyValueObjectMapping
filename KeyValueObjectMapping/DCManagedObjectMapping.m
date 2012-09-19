@@ -58,11 +58,12 @@
     }
 
     if (objects.count > 1) {
-        NSLog(@"(Find): detected %i %@s in context with %@: %@ --lastObject will be returned",
+        TFLog(@"(findObjectByPrimaryKeyValue): detected %i %@s in context with %@: %@ --lastObject will be returned",
                 objects.count,
                 NSStringFromClass(self.classToGenerate),
                 primaryKeyAttribute.objectMapping.attributeName,
                 primaryKeyValue);
+        TFLog(@"%@", objects);
     }
 
     return [objects lastObject];
