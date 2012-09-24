@@ -43,10 +43,6 @@
 
 - (id)findObjectByPrimaryKeyValue:(id)primaryKeyValue
 {
-    if ([self.classToGenerate respondsToSelector:@selector(findObjectByPrimaryKeyValue:)]) {
-        return [self.classToGenerate findObjectByPrimaryKeyValue:primaryKeyValue];
-    }
-
     DCDynamicAttribute * primaryKeyAttribute = [self primaryKeyAttribute];
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", primaryKeyAttribute.objectMapping
