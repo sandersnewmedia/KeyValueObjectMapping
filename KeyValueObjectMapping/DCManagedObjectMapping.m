@@ -56,7 +56,7 @@
         NSLog(@"%@", [error localizedDescription]);
         return nil;
     }
-    assert(objects.count<=1);
+//    assert(objects.count<=1);
     return [objects lastObject];
 }
 
